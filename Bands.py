@@ -1,5 +1,6 @@
 import tkinter as tk
-
+class Participant:
+    pass
 class ConcursoBandasApp:
     def __init__(self):
         self.ventana = tk.Tk()
@@ -31,16 +32,14 @@ class ConcursoBandasApp:
 
     def inscribir_banda(self):
         print("Se abrió la ventana: Inscribir Banda")
-        tk.Toplevel(self.ventana).title("Inscribir Banda")
-
+        tk.Toplevel(self.ventana).geometry("500x300")
     def registrar_evaluacion(self):
         print("Se abrió la ventana: Registrar Evaluación")
         tk.Toplevel(self.ventana).title("Registrar Evaluación")
-
+        self.ventana.geometry("1000x700")
     def listar_bandas(self):
         print("Se abrió la ventana: Listado de Bandas")
         tk.Toplevel(self.ventana).title("Listado de Bandas")
-
     def ver_ranking(self):
         print("Se abrió la ventana: Ranking Final")
         tk.Toplevel(self.ventana).title("Ranking Final")
