@@ -1,6 +1,13 @@
 import tkinter as tk
 class Participant:
-    pass
+    def __init__(self,nombre,institucion):
+        self.__nombre = nombre
+        self.__institucion = institucion
+    def get_nombre(self):
+        return self.__nombre
+    def set_nombre(self,nom):
+        if nom.strip() != "":
+            self.__nombre = nom
 class ConcursoBandasApp:
     def __init__(self):
         self.ventana = tk.Tk()
@@ -35,7 +42,6 @@ class ConcursoBandasApp:
         band = tk.Toplevel(self.ventana)
         band.title("Inscribir Banda")
         band.geometry("600x400")
-        tk.Toplevel(self.ventana).geometry("500x300")
     def registrar_evaluacion(self):
         print("Se abrió la ventana: Registrar Evaluación")
         evaluation = tk.Toplevel(self.ventana)
