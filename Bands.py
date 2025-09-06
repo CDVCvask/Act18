@@ -15,6 +15,12 @@ class Participantes:
             self.__institucion = inst
     def Mostar(self):
         print(f"Nombre: {self.get_nombre()} -- Institucion: {self.get_institucion()}")
+class Banda_Escolar(Participantes):
+    def __init__(self,nombre,institucion,catogoria,puntaje):
+        self.nombre = nombre
+        self.institucion = institucion
+        self.__categoria = catogoria
+        self.__puntaje = puntaje
 class ConcursoBandasApp:
     def __init__(self):
         self.ventana = tk.Tk()
