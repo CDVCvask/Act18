@@ -39,7 +39,9 @@ class ConcursoBandasApp:
         self.ventana.geometry("1000x700")
     def listar_bandas(self):
         print("Se abrió la ventana: Listado de Bandas")
-        tk.Toplevel(self.ventana).title("Listado de Bandas")
+        listar = tk.Toplevel(self.ventana)
+        listar.title("Listado de Bandas")
+        listar.geometry("600x400")
     def ver_ranking(self):
         print("Se abrió la ventana: Ranking Final")
         tk.Toplevel(self.ventana).title("Ranking Final")
