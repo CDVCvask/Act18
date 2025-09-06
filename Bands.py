@@ -1,5 +1,5 @@
 import tkinter as tk
-class Participant:
+class Participantes:
     def __init__(self,nombre,institucion):
         self.__nombre = nombre
         self.__institucion = institucion
@@ -8,6 +8,13 @@ class Participant:
     def set_nombre(self,nom):
         if nom.strip() != "":
             self.__nombre = nom
+    def get_institucion(self):
+        return self.__institucion
+    def set_institucion(self,inst):
+        if inst.strip() != "":
+            self.__institucion = inst
+    def Mostar(self):
+        print(f"Nombre: {self.get_nombre()} -- Institucion: {self.get_institucion()}")
 class ConcursoBandasApp:
     def __init__(self):
         self.ventana = tk.Tk()
