@@ -8,6 +8,8 @@ class Participantes:
     def set_nombre(self,nom):
         if nom.strip() != "":
             self.__nombre = nom
+        else:
+            print("No se permite dejar el nombre en blanco")
     def get_institucion(self):
         return self.__institucion
     def set_institucion(self,inst):
@@ -20,7 +22,19 @@ class Banda_Escolar(Participantes):
         self.nombre = nombre
         self.institucion = institucion
         self.__categoria = catogoria
-        self.__puntaje = puntaje
+        self.__puntaje = 0
+    def get_categoria(self):
+        return self.__categoria
+    def set_categoria(self,cat):
+        if cat != "":
+            check = cat.lower()
+            if check == "primaria" or check == "básico" or check == "basico" or check == "diversificado":
+                self.__categoria = cat
+            else:
+                print("La categoría ingresada no es valida")
+        else:
+            print("No puede dejar el espacio vacío")
+
 class ConcursoBandasApp:
     def __init__(self):
         self.ventana = tk.Tk()
