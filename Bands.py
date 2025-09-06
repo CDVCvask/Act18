@@ -34,7 +34,11 @@ class Banda_Escolar(Participantes):
                 print("La categoría ingresada no es valida")
         else:
             print("No puede dejar el espacio vacío")
-
+    def get_puntaje(self):
+        return self.__puntaje
+    def registrar_puntajes(self):
+        #Sincronización,Ritmo,Marcha,Presentación,
+        pass
 class ConcursoBandasApp:
     def __init__(self):
         self.ventana = tk.Tk()
