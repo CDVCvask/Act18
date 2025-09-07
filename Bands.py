@@ -19,8 +19,7 @@ class Participantes:
         print(f"Nombre: {self.get_nombre()} -- Institucion: {self.get_institucion()}")
 class Banda_Escolar(Participantes):
     def __init__(self,nombre,institucion,categoria):
-        self.nombre = nombre
-        self.institucion = institucion
+        super().__init__(nombre, institucion)
         self.__categoria = categoria
         self.__puntaje = 0
     def get_categoria(self):
@@ -34,8 +33,6 @@ class Banda_Escolar(Participantes):
                 print("La categoría ingresada no es valida")
         else:
             print("No puede dejar el espacio vacío")
-    def guardar(self):
-        pass
     def get_puntaje(self):
         return self.__puntaje
     def registrar_puntajes(self,sin,rit,mar,pres):
@@ -65,17 +62,14 @@ class Banda_Escolar(Participantes):
                 print("La puntuación de sincronización no es valida")
         else:
             print("La puntuación de sincronización no es valida")
-    def Mostrar(self):
-        for b in self.bandas:
-            if b.puntaje == 0:
-                print(f"Nombre: {b.nombre} -- Institucion: {b.institucion} -- Categoria: {b.categoria}")
-            else:
-                print(f"Nombre: {b.nombre} -- Institucion: {b.institucion} -- Categoria: {b.categoria} -- Puntaje: {b.puntaje}")
 class concurso:
     def __init__(self):
         self.participantes = {}
     def Agregar_Participante(self,banda):
-        self.participantes[banda.nombre] = {'Institucion':banda.institucion,'Categoria':banda.categoria,'Puntaje':banda.puntaje}
+        self.participantes[banda.get_nombre()] = {'Institucion':banda.get_institucion(),'Categoria':banda.get_categoria,'Puntaje':banda.get_puntaje()}
+    def get_bands(self):
+        return self.participantes
+con = concurso()
 class ConcursoBandasApp:
     def __init__(self):
         self.ventana = tk.Tk()
@@ -90,7 +84,6 @@ class ConcursoBandasApp:
             font=("Arial", 12, "bold"),
             justify="center"
         ).pack(pady=50)
-
         self.ventana.mainloop()
     def menu(self):
         barra = tk.Menu(self.ventana)
@@ -155,6 +148,13 @@ class ConcursoBandasApp:
         listar = tk.Toplevel(self.ventana)
         listar.title("Listado de Bandas")
         listar.geometry("600x400")
+        title3 = tk.Label(listar,text="Lista de las bandas participantes",font=("Arial", 16, "bold"))
+        title3.place(x=110, y=20)
+        part = tk.Listbox(listar,width=20,height=10)
+        part.place(x=210, y=200)
+        bandas = con.get_bands()
+        for band in bandas:
+            part.insert("end",band)
     def ver_ranking(self):
         print("Se abrió la ventana: Ranking Final")
         ranking = tk.Toplevel(self.ventana)
@@ -162,8 +162,7 @@ class ConcursoBandasApp:
         ranking.geometry("600x400")
     def Guardar(self,nombre,institucion,catogoria):
         new_band = Banda_Escolar(nombre,institucion,catogoria)
-        new_band.guardar()
-        new_band.Mostrar()
+        con.Agregar_Participante(new_band)
         #tk.Label(band,text=f"
 if __name__ == "__main__":
     ConcursoBandasApp()
