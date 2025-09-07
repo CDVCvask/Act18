@@ -34,6 +34,8 @@ class Banda_Escolar(Participantes):
                 print("La categoría ingresada no es valida")
         else:
             print("No puede dejar el espacio vacío")
+    def guardar(self):
+        pass
     def get_puntaje(self):
         return self.__puntaje
     def registrar_puntajes(self,sin,rit,mar,pres):
@@ -58,7 +60,6 @@ class ConcursoBandasApp:
         ).pack(pady=50)
 
         self.ventana.mainloop()
-
     def menu(self):
         barra = tk.Menu(self.ventana)
         opciones = tk.Menu(barra, tearoff=0)
@@ -76,6 +77,8 @@ class ConcursoBandasApp:
         band = tk.Toplevel(self.ventana)
         band.title("Inscribir Banda")
         band.geometry("600x400")
+        title1 =tk.Label(band, text="Porfavor ingrese todos los datos de su banda",font=("Arial", 16, "bold"))
+        #tk.Button(band, text="Guardar Banda", command=Banda_Escolar.guardar()).pack()
     def registrar_evaluacion(self):
         print("Se abrió la ventana: Registrar Evaluación")
         evaluation = tk.Toplevel(self.ventana)
