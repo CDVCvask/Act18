@@ -78,6 +78,11 @@ class ConcursoBandasApp:
         band.title("Inscribir Banda")
         band.geometry("600x400")
         title1 =tk.Label(band, text="Porfavor ingrese todos los datos de su banda",font=("Arial", 16, "bold"))
+        title1.place(x = 60, y = 20)
+        get_nombre = tk.Label(band, text="Nombre:",font=("Arial", 11, "bold"))
+        get_nombre.place(x = 20, y = 70)
+        entrada = tk.Entry(band, width=20)
+        entrada.place(x = 90, y = 70)
         #tk.Button(band, text="Guardar Banda", command=Banda_Escolar.guardar()).pack()
     def registrar_evaluacion(self):
         print("Se abrió la ventana: Registrar Evaluación")
