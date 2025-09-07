@@ -64,9 +64,9 @@ class Banda_Escolar(Participantes):
             print("La puntuación de sincronización no es valida")
 class concurso:
     def __init__(self):
-        self.participantes = {}
+        self.participantes = []
     def Agregar_Participante(self,banda):
-        self.participantes[banda.get_nombre()] = {'Institucion':banda.get_institucion(),'Categoria':banda.get_categoria,'Puntaje':banda.get_puntaje()}
+       self.participantes.append(banda)
     def get_bands(self):
         return self.participantes
 con = concurso()
@@ -150,11 +150,13 @@ class ConcursoBandasApp:
         listar.geometry("600x400")
         title3 = tk.Label(listar,text="Lista de las bandas participantes",font=("Arial", 16, "bold"))
         title3.place(x=110, y=20)
-        part = tk.Listbox(listar,width=20,height=10)
-        part.place(x=210, y=200)
+        part = tk.Listbox(listar,width=80,height=20)
+        part.place(x=60, y=60)
         bandas = con.get_bands()
         for band in bandas:
-            part.insert("end",band)
+            texto = (f"Nombre: {band.get_nombre()} | Institución: {band.get_institucion()} | "
+                     f"Categoría: {band.get_categoria()} | Puntaje: {band.get_puntaje()}")
+            part.insert("end",texto)
     def ver_ranking(self):
         print("Se abrió la ventana: Ranking Final")
         ranking = tk.Toplevel(self.ventana)
