@@ -91,6 +91,9 @@ class ConcursoBandasApp:
         get_cat.place(x=20, y=130)
         cat = tk.Entry(band, width=20)
         cat.place(x=105, y=130)
+        save =tk.Button(band,text="Guardar Banda",
+                  command =lambda:self.Guardar(nombre,inst,cat))
+        save.place(x = 150, y = 150)
         #tk.Button(band, text="Guardar Banda", command=Banda_Escolar.guardar()).pack()
     def registrar_evaluacion(self):
         print("Se abrió la ventana: Registrar Evaluación")
@@ -107,5 +110,8 @@ class ConcursoBandasApp:
         ranking = tk.Toplevel(self.ventana)
         ranking.title("Ranking Final")
         ranking.geometry("600x400")
+    def Guardar(self,nombre,institucion,catogoria):
+        print(f"Nombre: {nombre} -- Institucion: {institucion}, Categoria: {catogoria}")
+        #tk.Label(band,text=f"
 if __name__ == "__main__":
     ConcursoBandasApp()
