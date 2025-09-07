@@ -35,33 +35,7 @@ class Banda_Escolar(Participantes):
             print("No puede dejar el espacio vacío")
     def get_puntaje(self):
         return self.__puntaje
-    def registrar_puntajes(self,sin,rit,mar,pres):
-        #Sincronización,Ritmo,Marcha,Presentación
-        if isinstance(sin, int):
-            if sin >= 0 and sin <= 10:
-                if isinstance(rit, int):
-                    if rit >= 0 and rit <= 10:
-                        if isinstance(mar, int):
-                            if mar >= 0 and mar <= 10:
-                                if isinstance(pres, int):
-                                    if pres >= 0 and pres <= 10:
-                                        print("Se a calificado exitosamente")
-                                    else:
-                                        print("La puntuación de presentación no es valida")
-                                else:
-                                    print("La puntuación de presentación no es valida")
-                            else:
-                                print("La puntuación de Marcha no es valida")
-                        else:
-                            print("La puntuación de Marcha no es valida")
-                    else:
-                        print("La puntuación de ritmo no es valida")
-                else:
-                    print("La puntuación de ritmo no es valida")
-            else:
-                print("La puntuación de sincronización no es valida")
-        else:
-            print("La puntuación de sincronización no es valida")
+
 class concurso:
     def __init__(self):
         self.participantes = []
@@ -69,6 +43,41 @@ class concurso:
        self.participantes.append(banda)
     def get_bands(self):
         return self.participantes
+
+    def registrar_puntajes(self, sin, rit, mar, pres,name):
+        # Sincronización,Ritmo,Marcha,Presentación
+        for p in self.participantes:
+            if p.get_nombre() == name:
+                if isinstance(sin, int):
+                    if sin >= 0 and sin <= 10:
+                        if isinstance(rit, int):
+                            if rit >= 0 and rit <= 10:
+                                if isinstance(mar, int):
+                                    if mar >= 0 and mar <= 10:
+                                        if isinstance(pres, int):
+                                            if pres >= 0 and pres <= 10:
+                                                promedio = sin + rit + mar + pres
+                                                promedio = promedio / 4
+                                                p.set_puntaje = promedio
+                                                print("Se a calificado exitosamente")
+                                            else:
+                                                print("La puntuación de presentación no es valida")
+                                        else:
+                                            print("La puntuación de presentación no es valida")
+                                    else:
+                                        print("La puntuación de Marcha no es valida")
+                                else:
+                                    print("La puntuación de Marcha no es valida")
+                            else:
+                                print("La puntuación de ritmo no es valida")
+                        else:
+                            print("La puntuación de ritmo no es valida")
+                    else:
+                        print("La puntuación de sincronización no es valida")
+                else:
+                    print("La puntuación de sincronización no es valida")
+            else:
+                print("No hay ninguna banda con ese nombre")
 con = concurso()
 class ConcursoBandasApp:
     def __init__(self):
@@ -128,21 +137,27 @@ class ConcursoBandasApp:
         title2 = tk.Label(evaluation, text="Califique cada criterio de la banda del 0 al 10",font=("Arial", 16, "bold"))
         title2.place(x=70, y=20)
         get_sinc = tk.Label(evaluation, text="Sincronización:", font=("Arial", 11, "bold"))
-        get_sinc.place(x=20, y=70)
+        get_sinc.place(x=10, y=70)
         sinc = tk.Entry(evaluation, width=20)
-        sinc.place(x=145, y=70)
+        sinc.place(x=165, y=70)
         get_rit = tk.Label(evaluation, text="Ritmo:", font=("Arial", 11, "bold"))
-        get_rit.place(x=20, y=100)
+        get_rit.place(x=10, y=100)
         rit = tk.Entry(evaluation, width=20)
-        rit.place(x=145, y=100)
+        rit.place(x=165, y=100)
         get_mar = tk.Label(evaluation, text="Marcha:", font=("Arial", 11, "bold"))
-        get_mar.place(x=20, y=130)
+        get_mar.place(x=10, y=130)
         mar = tk.Entry(evaluation, width=20)
-        mar.place(x=145, y=130)
+        mar.place(x=165, y=130)
         get_pres = tk.Label(evaluation, text="Presentación:", font=("Arial", 11, "bold"))
-        get_pres.place(x=20, y=160)
+        get_pres.place(x=10, y=160)
         pres = tk.Entry(evaluation, width=20)
-        pres.place(x=145, y=160)
+        pres.place(x=165, y=160)
+        get_name = tk.Label(evaluation, text ="Nombre de la banda: ",font=("Arial", 11, "bold"))
+        get_name.place(x=10, y=190)
+        name = tk.Entry(evaluation, width=20)
+        name.place(x=165, y=190)
+        grade = tk.Button(evaluation,text="Calificar banda",command = lambda:self.Puntuar(name.get(),sinc.get(),rit.get(),mar.get(),pres.get()))
+        grade.place(x=50, y=240)
     def listar_bandas(self):
         print("Se abrió la ventana: Listado de Bandas")
         listar = tk.Toplevel(self.ventana)
@@ -162,9 +177,11 @@ class ConcursoBandasApp:
         ranking = tk.Toplevel(self.ventana)
         ranking.title("Ranking Final")
         ranking.geometry("600x400")
-    def Guardar(self,nombre,institucion,catogoria):
-        new_band = Banda_Escolar(nombre,institucion,catogoria)
+    def Guardar(self,nombre,institucion,categoria):
+        new_band = Banda_Escolar(nombre,institucion,categoria)
         con.Agregar_Participante(new_band)
         #tk.Label(band,text=f"
+    def Puntuar(self,nombre,sin,rit,mar,pres):
+        con.registrar_puntajes(sin,rit,mar,pres,nombre)
 if __name__ == "__main__":
     ConcursoBandasApp()
