@@ -18,10 +18,10 @@ class Participantes:
     def Mostar(self):
         print(f"Nombre: {self.get_nombre()} -- Institucion: {self.get_institucion()}")
 class Banda_Escolar(Participantes):
-    def __init__(self,nombre,institucion,catogoria,puntaje):
+    def __init__(self,nombre,institucion,categoria):
         self.nombre = nombre
         self.institucion = institucion
-        self.__categoria = catogoria
+        self.__categoria = categoria
         self.__puntaje = 0
     def get_categoria(self):
         return self.__categoria
@@ -41,7 +41,28 @@ class Banda_Escolar(Participantes):
     def registrar_puntajes(self,sin,rit,mar,pres):
         #Sincronización,Ritmo,Marcha,Presentación
         if isinstance(sin, int):
-            pass
+            if sin >= 0 and sin <= 10:
+                if isinstance(rit, int):
+                    if rit >= 0 and rit <= 10:
+                        if isinstance(mar, int):
+                            if mar >= 0 and mar <= 10:
+                                if isinstance(pres, int):
+                                    if pres >= 0 and pres <= 10:
+                                        print("Se a calificado exitosamente")
+                                    else:
+                                        print("La puntuación de presentación no es valida")
+                                else:
+                                    print("La puntuación de presentación no es valida")
+                            else:
+                                print("La puntuación de Marcha no es valida")
+                        else:
+                            print("La puntuación de Marcha no es valida")
+                    else:
+                        print("La puntuación de ritmo no es valida")
+                else:
+                    print("La puntuación de ritmo no es valida")
+            else:
+                print("La puntuación de sincronización no es valida")
         else:
             print("La puntuación de sincronización no es valida")
     def Mostrar(self):
@@ -52,7 +73,9 @@ class Banda_Escolar(Participantes):
                 print(f"Nombre: {b.nombre} -- Institucion: {b.institucion} -- Categoria: {b.categoria} -- Puntaje: {b.puntaje}")
 class concurso:
     def __init__(self):
-        participantes = {}
+        self.participantes = {}
+    def Agregar_Participante(self,banda):
+        self.participantes[banda.nombre] = {'Institucion':banda.institucion,'Categoria':banda.categoria,'Puntaje':banda.puntaje}
 class ConcursoBandasApp:
     def __init__(self):
         self.ventana = tk.Tk()
@@ -138,7 +161,7 @@ class ConcursoBandasApp:
         ranking.title("Ranking Final")
         ranking.geometry("600x400")
     def Guardar(self,nombre,institucion,catogoria):
-        new_band = Banda_Escolar(nombre,institucion,catogoria,0)
+        new_band = Banda_Escolar(nombre,institucion,catogoria)
         new_band.guardar()
         new_band.Mostrar()
         #tk.Label(band,text=f"
