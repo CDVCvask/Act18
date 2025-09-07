@@ -23,7 +23,6 @@ class Banda_Escolar(Participantes):
         self.institucion = institucion
         self.__categoria = catogoria
         self.__puntaje = 0
-        self.bandas = []
     def get_categoria(self):
         return self.__categoria
     def set_categoria(self,cat):
@@ -45,14 +44,15 @@ class Banda_Escolar(Participantes):
             pass
         else:
             print("La puntuación de sincronización no es valida")
-    def guardar_bandas(self,band):
-        self.bandas.append(band)
     def Mostrar(self):
         for b in self.bandas:
             if b.puntaje == 0:
                 print(f"Nombre: {b.nombre} -- Institucion: {b.institucion} -- Categoria: {b.categoria}")
             else:
                 print(f"Nombre: {b.nombre} -- Institucion: {b.institucion} -- Categoria: {b.categoria} -- Puntaje: {b.puntaje}")
+class concurso:
+    def __init__(self):
+        participantes = {}
 class ConcursoBandasApp:
     def __init__(self):
         self.ventana = tk.Tk()
@@ -114,19 +114,19 @@ class ConcursoBandasApp:
         get_sinc = tk.Label(evaluation, text="Sincronización:", font=("Arial", 11, "bold"))
         get_sinc.place(x=20, y=70)
         sinc = tk.Entry(evaluation, width=20)
-        sinc.place(x=125, y=70)
+        sinc.place(x=145, y=70)
         get_rit = tk.Label(evaluation, text="Ritmo:", font=("Arial", 11, "bold"))
         get_rit.place(x=20, y=100)
         rit = tk.Entry(evaluation, width=20)
-        rit.place(x=125, y=100)
+        rit.place(x=145, y=100)
         get_mar = tk.Label(evaluation, text="Marcha:", font=("Arial", 11, "bold"))
         get_mar.place(x=20, y=130)
         mar = tk.Entry(evaluation, width=20)
-        mar.place(x=125, y=130)
+        mar.place(x=145, y=130)
         get_pres = tk.Label(evaluation, text="Presentación:", font=("Arial", 11, "bold"))
-        get_pres.place(x=20, y=150)
+        get_pres.place(x=20, y=160)
         pres = tk.Entry(evaluation, width=20)
-        pres.place(x=125, y=150)
+        pres.place(x=145, y=160)
     def listar_bandas(self):
         print("Se abrió la ventana: Listado de Bandas")
         listar = tk.Toplevel(self.ventana)
