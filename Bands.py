@@ -35,7 +35,8 @@ class Banda_Escolar(Participantes):
             print("No puede dejar el espacio vacío")
     def get_puntaje(self):
         return self.__puntaje
-
+    def set_puntaje(self,punt):
+        self.__puntaje = punt
 class concurso:
     def __init__(self):
         self.participantes = []
@@ -46,6 +47,14 @@ class concurso:
 
     def registrar_puntajes(self, sin, rit, mar, pres,name):
         # Sincronización,Ritmo,Marcha,Presentación
+        try:
+            sin = int(sin)
+            rit = int(rit)
+            mar = int(mar)
+            pres = int(pres)
+            name = str(name)
+        except ValueError:
+            print("Valores no validos")
         for p in self.participantes:
             if p.get_nombre() == name:
                 if isinstance(sin, int):
@@ -58,7 +67,7 @@ class concurso:
                                             if pres >= 0 and pres <= 10:
                                                 promedio = sin + rit + mar + pres
                                                 promedio = promedio / 4
-                                                p.set_puntaje = promedio
+                                                p.set_puntaje(promedio)
                                                 print("Se a calificado exitosamente")
                                             else:
                                                 print("La puntuación de presentación no es valida")
