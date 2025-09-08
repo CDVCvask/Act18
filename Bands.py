@@ -191,6 +191,11 @@ class ConcursoBandasApp:
         part = tk.Listbox(ranking, width=80, height=20)
         part.place(x=60, y=60)
         bandas = con.get_bands()
+        ordenado = self.ordenar(bandas)
+        for band in ordenado:
+            texto = (f"Nombre: {band.get_nombre()} | Institución: {band.get_institucion()} | "
+                     f"Categoría: {band.get_categoria()} | Puntaje: {band.get_puntaje()}")
+            part.insert("end", texto)
     def Guardar(self,nombre,institucion,categoria):
         new_band = Banda_Escolar(nombre,institucion,categoria)
         con.Agregar_Participante(new_band)
@@ -198,6 +203,8 @@ class ConcursoBandasApp:
     def Puntuar(self,nombre,sin,rit,mar,pres):
         con.registrar_puntajes(sin,rit,mar,pres,nombre)
     def ordenar(self,bands):
+        if len(bands) <= 1:
+            return bands
         low = []
         same = []
         high = []
