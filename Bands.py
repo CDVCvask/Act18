@@ -205,6 +205,14 @@ class ConcursoBandasApp:
                      f"Categoría: {band.get_categoria()} | Puntaje: {band.get_puntaje()}")
             part.insert("end", texto)
     def Guardar(self,nombre,institucion,categoria):
+        categorias_validas = ["primaria", "basico", "básico", "diversificado"]
+        if categoria not in categorias_validas:
+            print("Error: Categoría no válida. Debe ser primaria, básico o diversificado")
+            return
+        for band in con.get_bands():
+            if band.get_nombre().lower() == nombre.lower():
+                print("Error: Ya existe una banda con ese nombre")
+                return
         new_band = Banda_Escolar(nombre,institucion,categoria)
         con.Agregar_Participante(new_band)
         #tk.Label(band,text=f"
