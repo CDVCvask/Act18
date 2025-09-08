@@ -186,11 +186,32 @@ class ConcursoBandasApp:
         ranking = tk.Toplevel(self.ventana)
         ranking.title("Ranking Final")
         ranking.geometry("600x400")
+        title4 = tk.Label(ranking,text="Ranking final de las bandas",font=("Arial", 16, "bold"))
+        title4.place(x=140, y=20)
+        part = tk.Listbox(ranking, width=80, height=20)
+        part.place(x=60, y=60)
+        bandas = con.get_bands()
     def Guardar(self,nombre,institucion,categoria):
         new_band = Banda_Escolar(nombre,institucion,categoria)
         con.Agregar_Participante(new_band)
         #tk.Label(band,text=f"
     def Puntuar(self,nombre,sin,rit,mar,pres):
         con.registrar_puntajes(sin,rit,mar,pres,nombre)
+    def ordenar(self,bands):
+        low = []
+        same = []
+        high = []
+        piv = 0
+        for band in bands:
+            piv = band.get_puntaje()
+            break
+        for band in bands:
+            if band.get_puntaje() < piv:
+                low.append(band)
+            elif band.get_puntaje() > piv:
+                high.append(band)
+            elif band.get_puntaje() == piv:
+                same.append(band)
+        return self.ordenar(low) + same + self.ordenar(high)
 if __name__ == "__main__":
     ConcursoBandasApp()
