@@ -137,6 +137,8 @@ class ConcursoBandasApp:
         save =tk.Button(band,text="Guardar Banda",
                   command =lambda:self.Guardar(nombre.get(),inst.get(),cat.get()))
         save.place(x = 70, y = 200)
+        exit = tk.Button(band,text="Regresar al menu principal",command=band.destroy)
+        exit.place(x = 430, y = 360)
         #tk.Button(band, text="Guardar Banda", command=Banda_Escolar.guardar()).pack()
     def registrar_evaluacion(self):
         print("Se abrió la ventana: Registrar Evaluación")
@@ -167,16 +169,20 @@ class ConcursoBandasApp:
         name.place(x=165, y=190)
         grade = tk.Button(evaluation,text="Calificar banda",command = lambda:self.Puntuar(name.get(),sinc.get(),rit.get(),mar.get(),pres.get()))
         grade.place(x=50, y=240)
+        exit = tk.Button(evaluation, text="Regresar al menu principal", command=evaluation.destroy)
+        exit.place(x=430, y=360)
     def listar_bandas(self):
         print("Se abrió la ventana: Listado de Bandas")
         listar = tk.Toplevel(self.ventana)
         listar.title("Listado de Bandas")
         listar.geometry("600x400")
         title3 = tk.Label(listar,text="Lista de las bandas participantes",font=("Arial", 16, "bold"))
-        title3.place(x=110, y=20)
-        part = tk.Listbox(listar,width=80,height=20)
-        part.place(x=60, y=60)
+        title3.place(x=110, y=10)
+        part = tk.Listbox(listar,width=80,height=19)
+        part.place(x=60, y=40)
         bandas = con.get_bands()
+        exit = tk.Button(listar, text="Regresar al menu principal", command=listar.destroy)
+        exit.place(x=430, y=360)
         for band in bandas:
             texto = (f"Nombre: {band.get_nombre()} | Institución: {band.get_institucion()} | "
                      f"Categoría: {band.get_categoria()} | Puntaje: {band.get_puntaje()}")
@@ -187,10 +193,12 @@ class ConcursoBandasApp:
         ranking.title("Ranking Final")
         ranking.geometry("600x400")
         title4 = tk.Label(ranking,text="Ranking final de las bandas",font=("Arial", 16, "bold"))
-        title4.place(x=140, y=20)
-        part = tk.Listbox(ranking, width=80, height=20)
-        part.place(x=60, y=60)
+        title4.place(x=140, y=10)
+        part = tk.Listbox(ranking, width=80, height=19)
+        part.place(x=60, y=40)
         bandas = con.get_bands()
+        exit = tk.Button(ranking, text="Regresar al menu principal", command=ranking.destroy)
+        exit.place(x=430, y=360)
         ordenado = self.ordenar(bandas)
         for band in ordenado:
             texto = (f"Nombre: {band.get_nombre()} | Institución: {band.get_institucion()} | "
@@ -219,6 +227,6 @@ class ConcursoBandasApp:
                 high.append(band)
             elif band.get_puntaje() == piv:
                 same.append(band)
-        return self.ordenar(low) + same + self.ordenar(high)
+        return self.ordenar(high) + same + self.ordenar(low)
 if __name__ == "__main__":
     ConcursoBandasApp()
