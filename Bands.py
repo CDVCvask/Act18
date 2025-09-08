@@ -206,7 +206,7 @@ class ConcursoBandasApp:
             part.insert("end", texto)
     def Guardar(self,nombre,institucion,categoria):
         categorias_validas = ["primaria", "basico", "básico", "diversificado"]
-        if categoria not in categorias_validas:
+        if categoria.lower() not in categorias_validas:
             print("Error: Categoría no válida. Debe ser primaria, básico o diversificado")
             return
         for band in con.get_bands():
